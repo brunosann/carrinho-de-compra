@@ -10,6 +10,7 @@
 </head>
 
 <body class="bg-gray-200">
+
     @include('header')
 
     <section class="container mx-auto my-4 sm:my-8 flex gap-4 sm:gap-8 justify-center flex-wrap">
@@ -23,14 +24,18 @@
                 <h2 class="text-2xl uppercase">{{ $product->name }}</h2>
                 <p class="font-semibold text-gray-500 text-lg my-2">R$ {{ $product->price }}</p>
                 <p>{{ $product->description }}</p>
-                <a href="#"
+                <button type="button" data-product="{{ $product->id }}"
                     class="block bg-gray-300 py-2 px-2 text-gray-600 text-center rounded shadow-lg uppercase font-semibold mt-6 hover:bg-gray-400 hover:text-white duration-300 ease-in-out">
                     Adicionar ao Carrinho
-                </a>
+                </button>
             </div>
         </article>
         @endforeach
     </section>
+
+    <x-cart />
+
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
