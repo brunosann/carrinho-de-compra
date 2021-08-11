@@ -102,3 +102,5 @@ window.downItemCart = (el) => {
   localStorage.setItem("_cart", JSON.stringify(cartItems));
   renderCart();
 };
+
+renderCart();

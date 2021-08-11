@@ -27,19 +27,19 @@ return $acc + floatval($item['price']) * floatval($item['qt']);
             <div class="mx-3">
                 <h3 class="text-sm text-gray-600" data-name=""></h3>
                 <div class="flex items-center mt-2" data-cart-product="">
-                    <button onclick="upItemCart(this)"
-                        class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
-                        <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </button>
-                    <span class="text-gray-700 mx-2" data-quantity=""></span>
                     <button onclick="downItemCart(this)"
                         class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
                         <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </button>
+                    <span class="text-gray-700 mx-2" data-quantity=""></span>
+                    <button onclick="upItemCart(this)"
+                        class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
+                        <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </button>
                 </div>
@@ -57,19 +57,19 @@ return $acc + floatval($item['price']) * floatval($item['qt']);
                 <div class="mx-3">
                     <h3 class="text-sm text-gray-600" data-name="">{{ $cartItem['name'] }}</h3>
                     <div class="flex items-center mt-2" data-cart-product="{{ $cartItem['id'] }}">
-                        <button onclick="upItemCart(this)"
-                            class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </button>
-                        <span class="text-gray-700 mx-2" data-quantity="">{{ $cartItem['qt'] }}</span>
                         <button onclick="downItemCart(this)"
                             class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
                             <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                        <span class="text-gray-700 mx-2" data-quantity="">{{ $cartItem['qt'] }}</span>
+                        <button onclick="upItemCart(this)"
+                            class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
+                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </button>
                     </div>
