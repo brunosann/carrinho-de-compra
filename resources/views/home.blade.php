@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script>
+        const BASE_URL = '{{ env('APP_URL') }}'
+    </script>
     <title>Integração PagSeguro</title>
 </head>
 
@@ -20,12 +24,12 @@
             <div class="">
                 <img src="{{ asset('imgs/'. $product->image) }}" alt="" class="rounded-t">
             </div>
-            <div class="p-4">
+            <div class="p-4 text-center">
                 <h2 class="text-2xl uppercase">{{ $product->name }}</h2>
-                <p class="font-semibold text-gray-500 text-lg my-2">R$ {{ $product->price }}</p>
+                <p class="font-semibold text-gray-700 text-lg my-2">R$ <span>{{ $product->price }}</span> </p>
                 <p>{{ $product->description }}</p>
                 <button type="button" data-product="{{ $product->id }}"
-                    class="block bg-gray-300 py-2 px-2 text-gray-600 text-center rounded shadow-lg uppercase font-semibold mt-6 hover:bg-gray-400 hover:text-white duration-300 ease-in-out">
+                    class="block bg-gray-300 py-2 px-2 text-gray-600 text-center rounded shadow-lg uppercase font-semibold mt-6 mx-auto hover:bg-gray-400 hover:text-white duration-300 ease-in-out">
                     Adicionar ao Carrinho
                 </button>
             </div>

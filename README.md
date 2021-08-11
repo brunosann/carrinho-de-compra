@@ -24,8 +24,8 @@
 -   -   Terminal -> composer install
 -   -   Terminal -> npm install
 
--   copie o arquivo **".env.example"** e crie um **".env"**
-
+-   Copie o arquivo **".env.example"** e crie um **".env"**
+-   No arquivo **".env"** altere **APP_URL** para sua URL, raiz sem barra na ultima palavra
 -   Crie um Banco de Dados com o nome **"integration"**
 
 -   Criar as tabelas do Banco de Dados e popular dados

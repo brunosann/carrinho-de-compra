@@ -1,3 +1,9 @@
+@php
+$total = session('cart') ? array_reduce(session('cart'), function ($acc, $item) {
+return $acc + floatval($item['price']) * floatval($item['qt']);
+}, 0) : '00,00'
+@endphp
+
 <aside id="cart"
     class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 overflow-y-auto bg-white border-l-2 border-gray-300">
     <div class="flex items-center justify-between">
@@ -9,6 +15,10 @@
             </svg>
         </button>
     </div>
+    <div class="flex items-center justify-between">
+        <h3 class="text-xl text-gray-700">Total</h3>
+        <p class="text-gray-600 text-sm">R$ <span id="cart-total">{{ $total }}</span></p>
+    </div>
     <hr class="my-3">
 
     <div id="cart-component" class="justify-between mt-6 hidden">
@@ -16,15 +26,17 @@
             <img class="h-20 w-20 object-cover rounded" data-image="" src="" alt="">
             <div class="mx-3">
                 <h3 class="text-sm text-gray-600" data-name=""></h3>
-                <div class="flex items-center mt-2">
-                    <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                <div class="flex items-center mt-2" data-cart-product="">
+                    <button onclick="upItemCart(this)"
+                        class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
                         <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </button>
                     <span class="text-gray-700 mx-2" data-quantity=""></span>
-                    <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                    <button onclick="downItemCart(this)"
+                        class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
                         <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -33,26 +45,28 @@
                 </div>
             </div>
         </div>
-        <span class="text-gray-600 text-sm" data-price=""></span>
+        <p class="text-gray-600 text-sm">R$ <span data-price=""></span></p>
     </div>
 
     <div id="box-cart">
+        @if (session('cart'))
+        @foreach (session('cart') as $cartItem)
         <div class="flex justify-between mt-6">
             <div class="flex">
-                <img class="h-20 w-20 object-cover rounded"
-                    src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
-                    alt="">
+                <img class="h-20 w-20 object-cover rounded" data-image="" src="{{ $cartItem['image'] }}" alt="">
                 <div class="mx-3">
-                    <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
-                    <div class="flex items-center mt-2">
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                    <h3 class="text-sm text-gray-600" data-name="">{{ $cartItem['name'] }}</h3>
+                    <div class="flex items-center mt-2" data-cart-product="{{ $cartItem['id'] }}">
+                        <button onclick="upItemCart(this)"
+                            class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
                             <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </button>
-                        <span class="text-gray-700 mx-2">2</span>
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+                        <span class="text-gray-700 mx-2" data-quantity="">{{ $cartItem['qt'] }}</span>
+                        <button onclick="downItemCart(this)"
+                            class="py-1 text-gray-500 focus:outline-none focus:text-gray-600">
                             <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -61,34 +75,10 @@
                     </div>
                 </div>
             </div>
-            <span class="text-gray-600 text-sm">20$</span>
+            <p class="text-gray-600 text-sm">R$ <span data-price="">{{ $cartItem['price'] }}</span></p>
         </div>
-        <div class="flex justify-between mt-6">
-            <div class="flex">
-                <img class="h-20 w-20 object-cover rounded"
-                    src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"
-                    alt="">
-                <div class="mx-3">
-                    <h3 class="text-sm text-gray-600">Mac Book Pro</h3>
-                    <div class="flex items-center mt-2">
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </button>
-                        <span class="text-gray-700 mx-2">2</span>
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <span class="text-gray-600 text-sm">20$</span>
-        </div>
+        @endforeach
+        @endif
     </div>
 
     <a href="#"
