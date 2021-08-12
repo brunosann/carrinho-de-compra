@@ -13,7 +13,7 @@
   <title>Integração PagSeguro</title>
 </head>
 
-<body class="bg-gray-200">
+<body class="bg-gray-100">
 
   @include('header')
 

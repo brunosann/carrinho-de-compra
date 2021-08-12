@@ -9,6 +9,7 @@ const btnCloseCart = S("#btn-close");
 const btnOpenCart = S("#btn-cart");
 const cartTotal = S("#cart-total");
 const cartItemsQuantity = S(".cart-quantity");
+const checkoutItems = S("#checkout-items");
 
 [btnCloseCart, btnOpenCart].forEach((btn) =>
   btn.addEventListener("click", () => cart.classList.toggle("active"))
@@ -28,6 +29,7 @@ const renderCart = () => {
   let itemsTotal = 0;
   const cartComponents = [];
   const cartItems = JSON.parse(localStorage.getItem("_cart"));
+  if (!cartItems) return;
   cartItems.forEach((cartItem) => {
     cartComponent.classList.remove("hidden");
     cartComponent.classList.add("flex");
@@ -42,7 +44,8 @@ const renderCart = () => {
     cartComponents.push(cartComponent.outerHTML);
     itemsTotal += Number(cartItem.qt);
   });
-  countTotal(cartItems);
+  const total = countTotal(cartItems);
+  if (checkoutItems) renderCheckoutItems(cartComponents, total);
   boxCart.innerHTML = cartComponents.join(" ");
   cartItemsQuantity.innerText = itemsTotal;
   // debounce
@@ -50,6 +53,12 @@ const renderCart = () => {
   timer = setTimeout(() => {
     cartSynchronization(cartItems, itemsTotal);
   }, 750);
+};
+
+const renderCheckoutItems = (cartComponents, priceTotal) => {
+  checkoutItems.innerHTML = cartComponents.join(" ");
+  S("#checkout-total").innerText =
+    "R$ " + priceTotal.toFixed(2).replace(".", ",");
 };
 
 const handleCart = ({ target }) => {
@@ -67,9 +76,10 @@ btnsCart.forEach((btn) => btn.addEventListener("click", handleCart));
 
 const countTotal = (items) => {
   const priceTotal = items.reduce((acc, item) => {
-    return acc + Number(item.price) * Number(item.qt);
+    return acc + Number(item.price.replace(",", ".")) * Number(item.qt);
   }, 0);
   cartTotal.innerText = priceTotal.toFixed(2).replace(".", ",");
+  return priceTotal;
 };
 
 const cartSynchronization = async (cart, itemsTotal) => {

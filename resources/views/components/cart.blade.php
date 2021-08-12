@@ -1,6 +1,6 @@
 @php
 $total = session('cart') ? array_reduce(session('cart'), function ($acc, $item) {
-return $acc + floatval($item['price']) * floatval($item['qt']);
+return $acc + str_replace(',', '.',$item['price']) * str_replace(',', '.',$item['qt']) ;
 }, 0) : '00,00'
 @endphp
 

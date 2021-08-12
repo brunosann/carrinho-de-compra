@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/sync-cart', [CartController::class, 'sync'])->name('cart.sync');
+Route::get('/comprar', [CheckoutController::class, 'index'])->name('checkout');
