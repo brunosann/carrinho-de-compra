@@ -6,8 +6,8 @@
 
 ### Andamento do Projeto:
 
--   [x] Desenvolvimento
--   [ ] Finalizado
+-   [ ] Desenvolvimento
+-   [x] Finalizado
 
 ## Requisitos
 
